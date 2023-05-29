@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/dyonone/bandolink/master/public/img/bandolink-logo.png" alt="alt text">
+<img src="https://ibb.co/FYTwQf8" alt="alt text">
 
 This project was built with Laravel framework for the digitalization of data in the production department of PT. Bando Indonesia. It provides product and material traceability, plots the data with a chart, and could be supervised anywhere.
 
