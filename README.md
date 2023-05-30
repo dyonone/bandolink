@@ -4,6 +4,6 @@ This project was built with Laravel framework for the digitalization of data in 
 
 This project will connect each department and make it convenient to update material availability.
 
-DISCLAIMER: This project is under development, and some features may not function properly.
+!!! This project is under development, and some features may not function properly.
 
 
