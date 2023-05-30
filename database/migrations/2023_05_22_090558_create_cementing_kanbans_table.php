@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cementing_kanbans', function (Blueprint $table) {
             $table->id();
-            $table->string('jenisCord');
+            $table->string('cord');
             $table->integer('rop');
             $table->integer('qty')->nullable();
             $table->timestamps();

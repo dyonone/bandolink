@@ -4,6 +4,7 @@ use App\Http\Controllers\CementingController;
 use App\Http\Controllers\ShortsizeKaryawanController;
 use App\Http\Controllers\ShortsizeBuildingController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ShortsizeAdminController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Cementing;
 use App\Models\ShortsizeKaryawan;
@@ -23,43 +24,26 @@ Route::get('/', function () {
     return 'welcome';
 });
 
-Route::get('test', function () {
-    return view('test',[
-        'title' => 'test'
-    ]);
-});
+Route::get('login', [LoginController::class, 'index']);
 
-Route::get('login', [LoginController::class, 'authenticate']);
+Route::get('shortsize/building', [ShortsizeBuildingController::class, 'index']);
 
-Route::get('shortsize/building',[ShortsizeBuildingController::class, 'index']);
+Route::get('shortsize/building/mandrel',[ShortsizeBuildingController::class, 'mandrel']);
 
-Route::get('shortsize/building/mandrel', function () {
-    return view('shortsize.building.mandrel',[
-        'title' => 'Mandrel dan Pisau'
-    ]);
-});
+Route::get('shortsize/admin/dashboard', [ShortsizeAdminController::class, 'index']);
 
-Route::get('cementing', function () {
-    return view('cementing.index',[
-        'title' => 'Cementing',
-        'cementings' => Cementing::all()
-    ]);
-});
+Route::get('shortsize/admin/karyawan', [ShortsizeAdminController::class, 'karyawan']);
+
+Route::post('shortsize/admin/karyawan', [ShortsizeAdminController::class, 'store']);
+
+Route::delete('shortsize/admin/karyawan/{id}', [ShortsizeAdminController::class, 'destroy']);
+
+Route::get('cementing', [CementingController::class, 'index']);
+
+Route::post('cementing', [CementingController::class, 'store']);
+Route::delete('cementing/{id}', [CementingController::class, 'destroy']);
 
 Route::get('cementing/kanban', [CementingController::class, 'kanban']);
-
-Route::get('shortsize/admin/dashboard', function () {
-    return view('shortsize.admin.dashboard',[
-        'title' => 'dashboard'
-    ]);
-});
-
-Route::get('shortsize/admin/karyawan', function () {
-    return view('shortsize.admin.karyawan',[
-        'title' => 'karyawan',
-        'karyawan' => ShortsizeKaryawan::all()
-    ]);
-});
 
 Route::get('tracing', function () {
     return view('tracing',[
@@ -67,9 +51,8 @@ Route::get('tracing', function () {
     ]);
 });
 
-// Route::post('/test', [TestController::class, 'test']);
-Route::post('/cementing', [CementingController::class, 'store']);
-Route::post('/shortsize/admin/karyawan', [ShortsizeKaryawanController::class, 'store']);
-
-Route::delete('/cementing/{id}', [CementingController::class, 'destroy']);
-Route::delete('/shortsize/admin/karyawan/{id}', [ShortsizeKaryawanController::class, 'destroy']);
+Route::get('test', function () {
+    return view('test',[
+        'title' => 'test'
+    ]);
+});

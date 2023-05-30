@@ -2,7 +2,7 @@
 
   @section('container')
 
-  <div class="row py-1 justify-content-center">
+  <div class="row justify-content-center">
 
     {{-- mesin 1 --}}
     <div class="col-lg-5 mb-3">
@@ -12,7 +12,7 @@
         <div class="card-header text-center fs-3">MESIN 1</div>
         <div class="card-body bg-light">
           <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-9">
               <div class="fs-5 text-center mt-2">Jenis Cord</div>
               <hr style="margin-top: 0">
               <div class="row gap-1 justify-content-center">
@@ -99,7 +99,7 @@
         <div class="card-header text-center fs-3">MESIN 2</div>
         <div class="card-body bg-light">
           <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-9">
               <div class="fs-5 text-center mt-2">Jenis Cord</div>
               <hr style="margin-top: 0">
               <div class="row gap-1 justify-content-center">
@@ -180,8 +180,8 @@
     </div>
   </div>
 
-  <div class="row mx-1 px-5 py-3 mb-5 bg-light rounded shadow-sm">
-    <div class="d-flex justify-content-between">
+  <div class="row mx-3 p-4 bg-light rounded shadow-sm">
+    <div class="row justify-content-between">
       <div class="input-group" style="width: 15rem">
         <span class="input-group-text">Tampilkan Data</span>
         <select class="form-select" id="tampilData">
@@ -193,8 +193,8 @@
       </div>
       <input type="text" id="cariData" class="form-control" placeholder="cari data..." style="width: 18rem">
     </div>
-    <table class="table bg-white table-striped table-bordered border-dark-subtle mt-3 mb-2" id="tbLaporan">
-      <thead class="bg-secondary-subtle">
+    <table class="stripe row-border mt-3 mb-2" id="tbLaporan">
+      <thead>
         <tr>
           <th class="text-center">No</th>
           <th>Time</th>

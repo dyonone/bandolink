@@ -14,7 +14,7 @@
           kartu kanban
         </div> --}}
         <div class="card-body" style="background-color: <?= $colors[$i]; $i++; ?>">
-          <p class="card-text fs-3 py-3">{{ $kanban->jenisCord }}</p>
+          <p class="card-text fs-3 py-3">{{ $kanban->cord }}</p>
         </div>
         <div class="card-footer text-body-secondary">
           <div class="d-flex justify-content-between">
