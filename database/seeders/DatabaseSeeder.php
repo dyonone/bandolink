@@ -13,15 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //kanban cementing
-        $cord = ['212GJ', '213GJ', '223GJ', '2x5GJ', '401GJ', '212GM', '213GM', '223GM', '244GM', '247GM'];
-        $rop  = [   28  ,   19   ,   20   ,   22   ,   16   ,   14   ,   19   ,   15   ,   24   ,   26   ];
+        // //kanban cementing
+        // $cord = ['212GJ', '213GJ', '223GJ', '2x5GJ', '401GJ', '212GM', '213GM', '223GM', '244GM', '247GM'];
+        // $rop  = [   28  ,   19   ,   20   ,   22   ,   16   ,   14   ,   19   ,   15   ,   24   ,   26   ];
         
-        for ($i = 0; $i < count($cord); $i++) {
-            CementingKanban::create([
-                'cord' => $cord[$i],
-                'rop'    => $rop[$i]
-            ]);
-        }
+        // for ($i = 0; $i < count($cord); $i++) {
+        //     CementingKanban::create([
+        //         'cord' => $cord[$i],
+        //         'rop'    => $rop[$i]
+        //     ]);
+        // }
     }
 }

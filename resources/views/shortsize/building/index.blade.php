@@ -41,13 +41,10 @@
     
         <input type="radio" class="btn-check" name="adr" value="2A1130323-4" id="an220">
         <label class="btn btn-outline-success mb-1" style="width: 4.6rem" for="an220">AN220</label>
-
         <input type="radio" class="btn-check" name="adr" value="1B2210323-5" id="gm70">
         <label class="btn btn-outline-success mb-1" style="width: 4.6rem" for="gm70">GM70</label>
-
         <input type="radio" class="btn-check" name="adr" value="1B2210323-5" id="gm868">
         <label class="btn btn-outline-success mb-1" style="width: 4.6rem" for="gm868">GM868</label>
-
         <input type="radio" class="btn-check" name="adr" value="2C3240323-2" id="gr41">
         <label class="btn btn-outline-success mb-1" style="width: 4.6rem" for="gr41">GR41</label>
 
@@ -93,7 +90,7 @@
     <hr style="margin-top: 0">
 
       <div>
-        <input type="radio" class="btn-check" name="cord" value="212gj" id="212gj">
+        <input type="radio" class="btn-check" name="cord" value="" id="212gj">
         <label class="btn btn-outline-success mb-1" style="width: 5.5rem" for="212gj">212 GJ</label>
         <input type="radio" class="btn-check" name="cord" value="212gj" id="213gj">
         <label class="btn btn-outline-success mb-1" style="width: 5.5rem" for="213gj">213 GJ</label>
@@ -103,9 +100,6 @@
         <label class="btn btn-outline-success mb-1" style="width: 5.5rem" for="2x5gj">2x5 GJ</label>
         <input type="radio" class="btn-check" name="cord" value="212gj" id="401gj">
         <label class="btn btn-outline-success mb-1" style="width: 5.5rem" for="401gj">401 GJ</label>
-      </div>
-
-      <div>
         <input type="radio" class="btn-check" name="cord" value="212gj" id="212gm">
         <label class="btn btn-outline-success mb-1" style="width: 5.5rem" for="212gm">212 GM</label>
         <input type="radio" class="btn-check" name="cord" value="212gj" id="213gm">
@@ -121,8 +115,8 @@
       <div class="col-md-9">
         <div class="input-group rounded mt-2">
           <span class="input-group-text">No. Lot</span>
-          <input type="text" id="lotcord" class="form-control" value="" disabled>
-          <i class="bx bx-repost bx-sm btn btn-secondary"></i>
+          <input type="text" id="lotcord" class="form-control" value="{{ $lot[0]->lotCementing }}" disabled>
+          <button class="btn btn-secondary" id="gantiCord" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bx bx-repost bx-sm"></i></button>
         </div>
 
         <div class="d-flex gap-2 mt-2">
@@ -157,7 +151,7 @@
 
   <div class="d-flex gap-1 justify-content-between">
     <div class="input-group" style="width: 20rem">
-      <input type="text" id="ppcInput" class="form-control me-1" placeholder="Input no. PPC" autofocus>
+      <input type="text" id="inputPpc" class="form-control me-1" placeholder="Input no. PPC" autofocus>
       <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalInput" id="buttonInput" onclick="clearModal()">Input</button>
     </div>
     <div class="nav nav-underline justify-content-center">
@@ -240,8 +234,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content bg-light">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <h1 class="modal-title fs-5 mx-auto" id="exampleModalLabel">Modal title</h1>
       </div>
       <div class="modal-body">
         <div class="row px-5">
@@ -358,6 +351,23 @@
   </div>
 </div>
 
+<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body rounded bg-light">
+        <form action="/shortsize/building" method="post">
+          @csrf
+          <div class="input-group">
+            <input type="text" class="form-control me-1" id="inputCord" name="code" placeholder="masukan barcode">
+            <button class="btn btn-primary">Ganti Lot</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script>
 $(document).ready(function(){
   $("#cariData").on("keyup", function() {
@@ -370,7 +380,7 @@ $(document).ready(function(){
   
   // function untuk fokus ke ppc
   function ppcFocus() {
-    document.getElementById('ppcInput').focus()
+    document.getElementById('inputPpc').focus()
   }
 
   // setiap radio button di klik, fokus ke ppc input
@@ -399,6 +409,10 @@ $(document).ready(function(){
     let selectedRadio = document.querySelector('input[name="cord"]:checked').value;
     document.getElementById("lotcord").value = selectedRadio;
   }
+
+  document.getElementById('gantiCord').addEventListener('click', () => {
+    document.getElementById('inputCord').focus()
+  });
   
   //tab untuk switch table laporan dan table inspeksi
   document.getElementById('navLaporan').addEventListener('click', () => {

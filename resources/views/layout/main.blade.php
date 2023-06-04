@@ -14,12 +14,12 @@
   <body class="bg-secondary-subtle">
     <nav class="navbar navbar-expand-lg py-3 bg-body-tertiary">
       <div class="container-fluid">
-        {{-- <a class="navbar-brand fs-3">{{ $title }}</a>
+        <a class="navbar-brand" style="width: 12rem">{{ $title }}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button> --}}
+        </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav me-auto">
+          <div class="navbar-nav mb-2 mb-lg-0 mx-auto">
             <a class="nav-link" href="/shortsize/building">Building</a>
             <a class="nav-link" href="/shortsize/building/mandrel">Mandrel & Pisau</a>
             <a class="nav-link" href="/cementing">Cementing</a>
@@ -28,7 +28,15 @@
             <a class="nav-link" href="/shortsize/admin/karyawan">Karyawan</a>
             <a class="nav-link" href="/tracing">Tracing</a>
           </div>
-          <span class="fs-3 me-2 text-danger"> UNDER DEVELOPMENT</span>
+          <div class="nav-item dropdown ms-auto me-3">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class='bx bx-sm bx-user-circle me-1'></i>Developer
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Profil</a></li>
+              <li><a class="dropdown-item" href="#">Logout</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>

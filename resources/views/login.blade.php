@@ -13,15 +13,16 @@
 					<div class="wrap d-md-flex">
 						<div class="img" style="background-image: url(img/login-bando.jpg);"></div>
 						<div class="login-wrap p-4 p-md-5">
-							<h3 class="mb-2">Login</h3>
-							<form action="#" class="signin-form">
+							<h3 class="mb-2">Masuk</h3>
+							<form action="/login" method="POST" class="signin-form">
+								@csrf
 								<div class="form-group mb-2">
-									<label class="label" for="name">Username</label>
-									<input type="text" class="form-control" placeholder="Username" required>
+									<label class="label" for="name">NIK</label>
+									<input type="text" class="form-control" name="nik" placeholder="NIK" required>
 								</div>
 								<div class="form-group mb-4">
-									<label class="label" for="password">Password</label>
-									<input type="password" class="form-control" placeholder="Password" required>
+									<label class="label" for="password">Kata Sandi</label>
+									<input type="password" class="form-control" name="password" placeholder="Kata Sandi" required>
 								</div>
 								<button type="submit" class="btn btn-primary rounded px-3 w-100">Login</button>
 							</form>

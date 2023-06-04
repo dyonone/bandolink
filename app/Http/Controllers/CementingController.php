@@ -19,56 +19,67 @@ class CementingController extends Controller
 
     public function store(Request $request)
     {
-        $mesin = $request->input('mesin'); //cek tobol mesin berapa yang di pencet
+      $mesin = $request->input('mesin'); //cek tobol mesin berapa yang di pencet
+      
+      $lotCementing = $mesin . 'A1' . date('dmy') . '-10';
 
-        if ( $mesin == 1 ) {   
-            $validatedData = $request->validate([
-                'cord_1' => 'required',
-                'lem_1' => 'required',
-                'lotCord_1' => 'required',
-                'lotCordUrut_1' => 'required',
-                'lotLem_1' => 'required',
-                'code_1' => 'required'
-            ]);
-            Cementing::create([
-                'time' => date('H:i:s'),
-                'jenisCord' => $validatedData['cord_1'],
-                'jenisLem' => $validatedData['lem_1'],
-                'lotSupplier' => $validatedData['lotCord_1'] . '/' . $validatedData['lotCordUrut_1'],
-                'expDate' => 'belom buat',
-                'lotLem' => $validatedData['lotLem_1'],
-                'lotCementing' => $mesin . 'A1' . date('dmy') . '-10',
-                'code' => $validatedData['code_1'],
-                'operator' => 'udin'
-            ]);
+      if ( $mesin == 1 ) {   
+          $validatedData = $request->validate([
+            'cord_1' => 'required',
+            'lem_1' => 'required',
+            'lotCord_1' => 'required',
+            'lotCordUrut_1' => 'required',
+            'lotLem_1' => 'required',
+            'code_1' => 'required'
+          ]);
+          Cementing::create([
+            'time' => date('H:i:s'),
+            'jenisCord' => $validatedData['cord_1'],
+            'jenisLem' => $validatedData['lem_1'],
+            'lotSupplier' => $validatedData['lotCord_1'] . '/' . $validatedData['lotCordUrut_1'],
+            'expDate' => 'belom buat',
+            'lotLem' => $validatedData['lotLem_1'],
+            'lotCementing' => $lotCementing,
+            'code' => $validatedData['code_1'],
+            'operator' => 'udin',
+            'output' => $validatedData['cord_1'] . $validatedData['lem_1'],
+            'terpakai' => false
+          ]);
 
-            // Update kanban qty
-            $output = $request->input('cord_1') . $request->input('lem_1');
-            CementingKanban::updateOrCreate(
-            ['cord' => $output],
-            ['qty' => DB::raw('qty + 1')]);
+          // Input ke database kanban
+          // CementingKanban::create([
+          //   'cord' => $validatedData['cord_1'] . $validatedData['lem_1'],
+          //   'lot' => $lotCementing,
+          //   'code' => $validatedData['code_1']
+          // ]);
 
-        } else {
-            $request->validate([
-                'cord_2' => 'required',
-                'lem_2' => 'required',
-                'lotCord_2' => 'required',
-                'lotCordUrut_2' => 'required',
-                'lotLem_2' => 'required',
-                'code_2' => 'required'
-            ]);  
-            Cementing::create([
-                'time' => date('H:i:s'),
-                'jenisCord' => $request->input('cord_2'),
-                'jenisLem' =>$request->input('lem_2'),
-                'lotSupplier' =>$request->input('lotCord_2') . '/' . $request->input('lotCordUrut_2'),
-                'expDate' => 'belom buat',
-                'lotLem' => $request->input('lotLem_2'),
-                'lotCementing' => $request->input('mesin') . 'A1' . date('dmy') . '-10',
-                'output' => $request->input('cord_2') . $request->input('lem_2'),
-                'code' =>$request->input('code_2'),
-                'operator' => 'ucup'
-            ]);
+      } else {
+          $validatedData = $request->validate([
+            'cord_2' => 'required',
+            'lem_2' => 'required',
+            'lotCord_2' => 'required',
+            'lotCordUrut_2' => 'required',
+            'lotLem_2' => 'required',
+            'code_2' => 'required'
+          ]);
+          Cementing::create([
+            'time' => date('H:i:s'),
+            'jenisCord' => $validatedData['cord_2'],
+            'jenisLem' => $validatedData['lem_2'],
+            'lotSupplier' => $validatedData['lotCord_2'] . '/' . $validatedData['lotCordUrut_2'],
+            'expDate' => 'belom buat',
+            'lotLem' => $validatedData['lotLem_2'],
+            'lotCementing' => $lotCementing,
+            'code' => $validatedData['code_2'],
+            'operator' => 'ucup'
+          ]);
+
+          // Input ke database kanban
+          CementingKanban::create([
+            'cord' => $validatedData['cord_2'] . $validatedData['lem_2'],
+            'lot' => $lotCementing,
+            'code' => $validatedData['code_2']
+          ]);
         }
 
         $request->flash();
@@ -85,21 +96,26 @@ class CementingController extends Controller
 
     public function kanban()
     {
-        $colors = ['#FFD1DC', '#B2DFDB', '#D7C7E9', '#AADEFA', '#FFFFE0', '#FAA5B4', '#A1D5C1', '#C8A2C8', '#7DADF1', '#FFE5B4'];
+      //jenis Cord
+        $cord  = [ '212GJ', '213GJ', '223GJ', '2x5GJ', '401GJ',
+                    '212GM', '213GM', '223GM', '244GM', '247GM' ];
+      //warna kanban tiap cord
+        $color = [ '#FFD1DC', '#B2DFDB', '#D7C7E9', '#AADEFA', '#FFFFE0',
+                    '#FAA5B4', '#A1D5C1', '#C8A2C8', '#7DADF1', '#FFE5B4' ];
+      //rop cord
+        $rop   = [ 28, 19, 20, 22, 16, 14, 19, 15, 24, 26 ];
+
+      //menghitung qty cord dari database kanban
+        foreach ($cord as $qtyCord) {
+          $qty[] = CementingKanban::where('cord', $qtyCord)->count();
+        }
 
         return view('cementing.kanban',[
-            'title' => 'Kanban',
-            'kanbans' => CementingKanban::all(),
-            
-            'colors' => $colors,
-            'i' => 0
+            'title'  => 'Kanban',
+            'cord'  => $cord,
+            'color' => $color,
+            'rop'   => $rop,
+            'qty'   => $qty
         ]);
     }
-
-    // public function api()
-    // {
-    //     $cementing = Cementing::all();
-    //     return response()->json($cementing);
-    // }
-
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\ShortsizeAdminController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Cementing;
 use App\Models\ShortsizeKaryawan;
+use Spatie\LaravelIgnition\Solutions\SolutionProviders\RouteNotDefinedSolutionProvider;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +26,10 @@ Route::get('/', function () {
 });
 
 Route::get('login', [LoginController::class, 'index']);
+Route::post('login', [LoginController::class, 'authenticate']);
 
 Route::get('shortsize/building', [ShortsizeBuildingController::class, 'index']);
+Route::post('shortsize/building', [ShortsizeBuildingController::class, 'gantiCord']);
 
 Route::get('shortsize/building/mandrel',[ShortsizeBuildingController::class, 'mandrel']);
 

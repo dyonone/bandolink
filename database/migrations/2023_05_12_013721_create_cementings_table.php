@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('lotCementing');
             $table->string('code');
             $table->string('operator');
+            $table->string('output');
+            $table->boolean('terpakai');
             $table->timestamps();
         });
     }
