@@ -6,17 +6,17 @@ This project will connect each department and make it convenient to update mater
 
 !!! This project is under development, and some features may not function properly.
 
-<a href="https://ibb.co/cbNtmwL"><img src="https://i.ibb.co/TKHRC1L/Screenshot-from-2023-05-15-22-46-47.png" alt="Screenshot-from-2023-05-15-22-46-47" border="0" /></a>
-<img src="">
-<img src="">
-<img src="">
-<img src="">
-<img src="">
-https://ibb.co/r0MqcNB
-https://ibb.co/cbNtmwL
-https://ibb.co/4przZzk
-https://ibb.co/pWgY6VW
-https://ibb.co/NFdNPBr
-https://ibb.co/yS3TGXN
+<b> Building
+<img src="https://i.ibb.co/Yhsm7mg/Screenshot-from-2023-06-06-23-11-27.png">
+    
+    Cementing
+<img src="https://i.ibb.co/JxNDW6x/Screenshot-from-2023-06-06-23-12-16.png">
+    
+    Admin Dashboard
+<img src="https://i.ibb.co/nwN1vJB/Screenshot-from-2023-06-06-23-17-03.png">
+    
+    Material details
+<img src="https://i.ibb.co/4dQy97F/Screenshot-from-2023-06-06-23-18-16.png">
+</b>
 
 
