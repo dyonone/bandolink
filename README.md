@@ -6,17 +6,16 @@ This project will connect each department and make it convenient to update mater
 
 !!! This project is under development, and some features may not function properly.
 
-<b> Building
+<b> Building </b>
 <img src="https://i.ibb.co/Yhsm7mg/Screenshot-from-2023-06-06-23-11-27.png">
-    
-    Cementing
+<br>
+<b> Building </b>
 <img src="https://i.ibb.co/JxNDW6x/Screenshot-from-2023-06-06-23-12-16.png">
-    
-    Admin Dashboard
-<img src="https://i.ibb.co/nwN1vJB/Screenshot-from-2023-06-06-23-17-03.png">
-    
-    Material details
+<br>
+<b> Building </b>
+<img src="https://i.ibb.co/rQRpSr3/Screenshot-from-2023-06-06-23-17-03.png">
+<br>
+<b> Building </b>
 <img src="https://i.ibb.co/4dQy97F/Screenshot-from-2023-06-06-23-18-16.png">
-</b>
 
 
