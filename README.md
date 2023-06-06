@@ -13,7 +13,7 @@ This project will connect each department and make it convenient to update mater
 <img src="https://i.ibb.co/JxNDW6x/Screenshot-from-2023-06-06-23-12-16.png">
 
 # Admin Dashboard
-<img src="https://i.ibb.co/rQRpSr3/Screenshot-from-2023-06-06-23-17-03.png">
+<img src="https://i.ibb.co/NLr4DxN/Screenshot-from-2023-06-06-23-27-57.png">
 
 # Material Tracing
 <img src="https://i.ibb.co/4dQy97F/Screenshot-from-2023-06-06-23-18-16.png">
