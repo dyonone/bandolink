@@ -10,26 +10,35 @@ class LoginController extends Controller
 {
     public function index() {
         return view('login',[
-            'title' => 'login'
+            'title' => 'login',
+            'img' => 4
         ]);
     }
 
+    /**
+     * Handle an authentication attempt.
+     */
     public function authenticate(Request $request): RedirectResponse
     {
-        
         $credentials = $request->validate([
             'nik' => ['required'],
             'password' => ['required'],
         ]);
-    
-        if (Auth::guard('karyawan')->attempt($credentials)) {
+ 
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-    
+ 
             return redirect()->intended('shortsize/admin/dashboard');
         }
-    
+ 
         return back()->withErrors([
             'nik' => 'The provided credentials do not match our records.',
         ])->onlyInput('nik');
+    }
+
+    public function logout(): RedirectResponse
+    {
+        Auth::logout();
+        return redirect('/login');
     }
 }

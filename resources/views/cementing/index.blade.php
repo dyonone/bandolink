@@ -214,7 +214,7 @@
         @foreach ($cementings as $cement)
         <tr>
           <th class="text-center">{{ $no++ }}</th>
-          <td>{{ $cement->time }}</td>
+          <td>{{ date('H:i', strtotime($cement->created_at)) }}</td>
           <td>{{ $cement->jenisCord }}</td>
           <td>{{ $cement->lotSupplier }}</td>
           <td>{{ $cement->expDate }}</td>

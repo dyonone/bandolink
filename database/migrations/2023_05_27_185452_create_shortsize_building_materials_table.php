@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('shortsize_building_materials', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
             $table->string('material');
-            $table->string('lot');
+            $table->string('lot')->nullable();
             $table->timestamps();
         });
     }

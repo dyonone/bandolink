@@ -1,16 +1,19 @@
 @extends('layout.main')
 
 @section('container')
-    
+    @php
+        $op = ['Zulfa', 'Suryadi', 'Iwan', 'Dian', 'Nanda'];
+        $hasil = ['33', '34', '32', '30', '33'];
+    @endphp
 <div class="row gap-3 pb-3">
   @for ($i = 1; $i <= 5; $i++)
     <div class="col-lg rounded shadow-sm bg-light">
       <div class="fs-5 fw-bold text-primary">line {{ $i }}</div>
       <div class="fs-5 text-center fw-light">operator</div>
-      <div class="fs-4 text-center mb-3">ZULFA</div>
+      <div class="fs-4 text-center mb-3">{{ $op[($i-1)] }}</div>
       <div class="d-flex justify-content-between mb-2">
-        <div class="fs-5 fw-light">hasil : 34 Slab</div>
-        <button class="btn btn-sm btn-primary" onclick="alert('belom dibuat')">laporan <i class='bx bx-right-arrow-alt'></i></button>
+        <div class="fs-5 fw-light">hasil : {{ $hasil[$i-1] }} slab</div>
+        <button class="btn btn-sm btn-primary" onclick="alert('belom dibuat')">Detail <i class='bx bx-right-arrow-alt'></i></button>
       </div>
     </div>
   @endfor
@@ -20,8 +23,8 @@
 
   <div class="d-flex justify-content-center mb-4">
     <div class="nav nav-underline">
-      <a class="nav-link text-dark active" id="btnProd">Produktivitas</a>
-      <a class="nav-link text-dark" id="btnAfkir">Afkir</a>
+      <button class="nav-link text-dark active" id="btnProd">Produktivitas</button>
+      <button class="nav-link text-dark" id="btnAfkir">Afkir</button>
     </div>
   </div>
 
@@ -45,7 +48,7 @@ const dataProd = {
     {
       label: 'shift 2',
       backgroundColor: '#dddd88',
-      data: [32, 34, 32, 26, 34],
+      data: [33, 34, 32, 30, 33],
     },
     {
       label: 'shift 3',

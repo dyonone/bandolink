@@ -11,17 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cementings', function (Blueprint $table) {
+        Schema::create('cementing_kanbans', function (Blueprint $table) {
             $table->id();
-            $table->string('jenisCord');
-            $table->string('lotSupplier');
-            $table->string('expDate');
-            $table->string('jenisLem');
-            $table->string('lotLem');
-            $table->string('lotCementing');
-            $table->string('code');
-            $table->string('operator');
             $table->string('cord');
+            $table->string('rop');
+            $table->integer('wip');
+            $table->string('warna');
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cementings');
+        Schema::dropIfExists('cementing_kanbans');
     }
 };

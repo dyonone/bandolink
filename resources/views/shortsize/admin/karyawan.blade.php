@@ -3,7 +3,7 @@
 @section('container')
 
 <div class="container">
-  <div class="row bg-light rounded shadow pt-2 justify-content-between">
+  <div class="row bg-light rounded shadow pt-2 pb-3 justify-content-between">
     <div class="col-lg-2 mt-2">
     <button type="button" id="tambah" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahKaryawan"><i class='bx bx-user-plus'></i> Tambah Karyawan</button>
   </div>
@@ -11,51 +11,47 @@
       <input type="text" class="form-control me-1" id="cariData" placeholder="Cari karyawan...">
     </div>
 
-    <div class="d-flex">
-      <table class="table table-striped mt-3 text-center" id="tbKaryawan">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Nama Lengkap</th>
-            <th>NIK</th>
-            <th>Jabatan</th>
-            <th>Group</th>
-            <th>Line</th>
-            <th>Bagian</th>
-            <th>No. Mesin</th>
-            <th>Opsi</th>
-          </tr>
-        </thead>
-        @php
-            $i = 1
-        @endphp
-        <tbody class="table-group-divider">
-          @foreach ($karyawan as $user)
-          <tr>
-          <th>{{ $i++ }}</th>
-          <td>{{ $user->nama }}</td>
-          <td>{{ $user->nik }}</td>
-          <td>{{ $user->jabatan }}</td>
-          <td>{{ $user->grup }}</td>
-          <td>{{ $user->line }}</td>
-          <td>{{ $user->bagian }}</td>
-          <td>{{ $user->noMesin }}</td>
-          <td style="width: 3rem">
-            <span type="button" data-bs-toggle="dropdown"><i class='bx bx-dots-vertical-rounded'></i></span>
-            <ul class="dropdown-menu">
-              <li><button class="dropdown-item" href="#">Edit</button></li>
-              <form action="/shortsize/admin/karyawan/{{ $user->id }}" method="post">
-              @csrf
-              @method('DELETE')
-                <li><button class="dropdown-item" type="submit">Delete</button></li>
-              </form>
-            </ul>
-          </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
-    </div>
+    <table class="stripe row-border my-3" id="tbKaryawan">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama Lengkap</th>
+          <th>NIK</th>
+          <th>Role</th>
+          <th>Group</th>
+          <th>Line</th>
+          <th>No. Mesin</th>
+          <th class="no-sort text-center">Opsi</th>
+        </tr>
+      </thead>
+      @php
+          $i = 1
+      @endphp
+      <tbody class="table-group-divider">
+        @foreach ($users as $user)
+        <tr>
+        <th>{{ $i++ }}</th>
+        <td>{{ $user->nama }}</td>
+        <td>{{ $user->nik }}</td>
+        <td>{{ $user->role }}</td>
+        <td>{{ $user->grup }}</td>
+        <td>{{ $user->line }}</td>
+        <td>{{ $user->noMesin }}</td>
+        <td class="text-center" style="width: 3rem">
+          <span type="button" data-bs-toggle="dropdown"><i class='bx bx-dots-vertical-rounded'></i></span>
+          <ul class="dropdown-menu">
+            <li><button class="dropdown-item" href="#">Edit</button></li>
+            <form action="/shortsize/admin/karyawan/{{ $user->id }}" method="post">
+            @csrf
+            @method('DELETE')
+              <li><button class="dropdown-item" type="submit">Delete</button></li>
+            </form>
+          </ul>
+        </td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
   </div>
 </div>
 
@@ -80,17 +76,18 @@
 
               <div class="fw-bold ms-1 mb-1">Kata Sandi</div>
               <input type="password" name="password" class="form-control mb-3" id="password" placeholder="password">
-
-              <div class="fw-bold ms-1 mb-1">Jabatan</div>
-              <select class="form-select mb-3" name="jabatan" id="jabatan">
-                <option value="operator">Operator</option>
-                <option value="supervisor">Supervisor</option>
-                <option value="manager">Manager</option>
-                <option value="admin">Admin</option>
-              </select>
             </div>
             
             <div class="col-md-5">
+              <div class="fw-bold ms-1 mb-1">Role</div>
+              <select class="form-select mb-3" name="role" id="role">
+                <option value="splicer">Splicer</option>
+                <option value="building">Building</option>
+                <option value="covering">Covering</option>
+                <option value="supervisor">Supervisor</option>
+                <option value="admin">Admin</option>
+              </select>
+
                 <div class="fw-bold ms-1 mb-1">Grup</div>
                   <select class="form-select mb-3" name="grup" id="grup">
                     <option value="A">A</option>
@@ -105,14 +102,6 @@
                   <label class="btn btn-outline-success mb-3" for="line{{ $i }}" style="width: 3rem">{{ $i }}</label>  
                   @endfor
                 </div>
-
-                <div class="fw-bold ms-1 mb-1">Bagian</div>
-                <select class="form-select mb-3" name="bagian" id="bagian">
-                  <option value="1">Splicer</option>
-                  <option value="2">Building</option>
-                  <option value="3">Covering</option>
-                  <option value="4">Curing</option>
-                </select>
               
                 <div class="fw-bold ms-1 mb-1">Nomor Mesin</div>
                 <input type="number" class="form-control" name="noMesin" id="noMesin" min="1" max="20" value="0" style="width: 5rem">
@@ -130,22 +119,27 @@
 
 <script>
   $(document).ready(function(){
-  $("#cariData").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#tbKaryawan tbody tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
+
+  var dataTable = $('#tbKaryawan').DataTable({
+    dom: 'rtip', //hide search and entries
+    stateSave: true,
+    columnDefs: [
+      { targets: 'no-sort', orderable: false } // Disable sorting on the first and third column
+    ]
   });
+
+  $('#cariData').on('keyup', function() {
+    dataTable.search($(this).val()).draw();
+  });
+  
 });
 
   let nama = document.getElementById('nama');
   let nik = document.getElementById('nik');
   let pass = document.getElementById('password');
-  let pass2 = document.getElementById('password2');
-  let jabatan = document.getElementById('jabatan');
+  let role = document.getElementById('role');
   let grup = document.getElementById('grup');
   let line = document.getElementsByName('line');
-  let bagian = document.getElementById('bagian');
   let noMesin = document.getElementById('noMesin');
 
   function clearLine() {
@@ -168,14 +162,12 @@
 
   function disableAll() {
     grup.disabled = true;
-    bagian.disabled = true;
     noMesin.disabled = true;
     disableLine()
   }
 
   function enableAll() {
     grup.disabled = false;
-    bagian.disabled = false;
     noMesin.disabled = false;
     enableLine()
   }
@@ -185,22 +177,25 @@
     nik.value = null;
     pass.value = null;
     noMesin.value = null;
-    jabatan.selectedIndex = -1;
+    role.selectedIndex = -1;
     grup.selectedIndex = -1;
-    bagian.selectedIndex = -1;
     clearLine();
     disableAll()
   });
 
-  jabatan.addEventListener('change', () => {
-    switch (jabatan.value) {
-      case 'manager':
+  role.addEventListener('change', () => {
+    switch (role.value) {
       case 'admin':
         disableAll();
       break;
       case 'supervisor':
         disableAll();
         grup.disabled = false;
+      break;
+      case 'splicer':
+        enableAll();
+        disableLine();
+        noMesin.disabled = true;
       break;
       default:
         enableAll();

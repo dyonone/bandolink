@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shortsize_karyawans', function (Blueprint $table) {
+        Schema::create('shortsize_building_hasils', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
             $table->string('nik');
-            $table->string('password');
-            $table->string('jabatan');
-            $table->string('grup')->nullable();
-            $table->integer('line')->nullable();
-            $table->string('bagian')->nullable();
-            $table->integer('noMesin')->nullable();
+            $table->string('grup');
+            $table->integer('shift');
+            $table->integer('hasil');
+            $table->integer('afkir');
+            $table->string('catatan');
+            $table->boolean('aktif');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shortsize_karyawans');
+        Schema::dropIfExists('shortsize_building_hasils');
     }
 };

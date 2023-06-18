@@ -13,7 +13,7 @@
   <button class="nav-link text-dark" id="navPisau">Pisau</button>
 </div>
 
-<table class="table table-striped mt-3 text-center" id="tbMandrel">
+<table class="table table-bordered bg-light mt-3 text-center" id="tbMandrel">
   <thead>
     <tr>
       <th>Mandrel</th>
@@ -31,10 +31,10 @@
     <td class="text-danger">50</td>
     <td>
       <div class="input-group mx-auto" style="width: 8rem">
-        <input type="text" class="form-control me-1"><button class="btn btn-primary" onclick="confirm('yakin?')">input</button>
+        <input type="text" class="form-control me-1" style="height: 1.8rem"><button class="btn btn-sm btn-primary" onclick="confirm('yakin?')">input</button>
       </div>
     </td>
-    <td><button class="btn btn-primary">Bongkar</button></td>
+    <td><button class="btn btn-sm btn-primary">Bongkar</button></td>
     <td>Supandang</td>
     <td>{{ date('D, d M Y') }}</td>
   </tr>
